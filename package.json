@@ -4,6 +4,9 @@
   "main": "index.js",
   "author": "igornfaustino <igor@nfaustino.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "tsnd src/index.ts"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
@@ -12,6 +15,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
+    "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.4"
   }
 }
