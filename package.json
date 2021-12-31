@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsnd src/index.ts",
     "prepare": "husky install",
-    "test": "jest"
+    "test": "jest --watch"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
