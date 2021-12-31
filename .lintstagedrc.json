@@ -1,5 +1,5 @@
 {
-  "*.ts": [
+  "*.[j|t]s": [
     "eslint --fix",
     "jest"
   ]
