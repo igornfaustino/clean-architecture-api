@@ -1,7 +1,6 @@
 {
     "env": {
         "commonjs": true,
-        "es2021": true,
         "node": true,
         "jest": true
     },
@@ -9,9 +8,10 @@
         "standard"
     ],
     "ignorePatterns": "./*.*",
-    "parser": "babel-eslint",
+    "parser": "@babel/eslint-parser",
     "parserOptions": {
-        "ecmaVersion": 13
+        "requireConfigFile": false,
+        "ecmaVersion": 8
     },
     "rules": {}
 }
