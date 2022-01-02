@@ -1,6 +1,6 @@
 {
   "*.[j|t]s": [
     "eslint --fix",
-    "jest --passWithNoTests --findRelatedTests"
+    "yarn test:staged"
   ]
 }
