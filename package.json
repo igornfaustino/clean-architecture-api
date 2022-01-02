@@ -7,9 +7,10 @@
   "scripts": {
     "dev": "tsnd src/index.ts",
     "prepare": "husky install",
-    "test": "jest --watch --silent --noStackTrace",
-    "test:staged": "jest --passWithNoTests --findRelatedTests --silent --noStackTrace",
-    "test:ci": "jest --silent --all --coverage"
+    "test:base": "jest --silent --noStackTrace --passWithNoTests",
+    "test": "yarn test:base --watch",
+    "test:staged": "yarn test:base  --findRelatedTests",
+    "test:ci": "yarn test:base --coverage"
   },
   "devDependencies": {
     "@types/jest": "^27.0.3",
