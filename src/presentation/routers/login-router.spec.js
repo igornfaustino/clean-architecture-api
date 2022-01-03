@@ -1,7 +1,7 @@
-const MissingParamError = require('../helpers/missing-param-error')
-const ServerError = require('../helpers/server-error')
-const UnauthorizedError = require('../helpers/unauthorized-error')
-const InvalidParamError = require('../helpers/unauthorized-error copy')
+const MissingParamError = require('../errors/missing-param-error')
+const ServerError = require('../errors/server-error')
+const UnauthorizedError = require('../errors/unauthorized-error')
+const InvalidParamError = require('../errors/invalid-param-error')
 const LoginRouter = require('./login-router')
 
 jest.spyOn(console, 'error').mockImplementation()
