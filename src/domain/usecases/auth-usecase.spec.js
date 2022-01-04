@@ -3,9 +3,19 @@ const AuthUseCase = require('./auth-usecase')
 
 const makeUpdateAccessTokenRepository = () => {
   class UpdateAccessTokenRepositorySpy {
-    update (userId, accessToken) {
+    async update (userId, accessToken) {
       this.userId = userId
       this.accessToken = accessToken
+    }
+  }
+
+  return new UpdateAccessTokenRepositorySpy()
+}
+
+const makeUpdateAccessTokenRepositoryWithError = () => {
+  class UpdateAccessTokenRepositorySpy {
+    async update (userId, accessToken) {
+      throw new Error()
     }
   }
 
@@ -181,7 +191,8 @@ describe('Auth UseCase', () => {
     const loadUserByEmailRepository = makeLoadUserByEmailRepository()
     const encrypter = makeEncrypter()
     const tokenGenerator = makeTokenGenerator()
-    const dependencies = { loadUserByEmailRepository, encrypter, tokenGenerator }
+    const updateAccessTokenRepository = makeUpdateAccessTokenRepository()
+    const dependencies = { loadUserByEmailRepository, encrypter, tokenGenerator, updateAccessTokenRepository }
     const suts = [
       new AuthUseCase(),
       new AuthUseCase({}),
@@ -192,7 +203,9 @@ describe('Auth UseCase', () => {
       new AuthUseCase({ ...dependencies, tokenGenerator: null }),
       new AuthUseCase({ ...dependencies, tokenGenerator: invalid }),
       new AuthUseCase({ ...dependencies, tokenGenerator: null }),
-      new AuthUseCase({ ...dependencies, tokenGenerator: invalid })
+      new AuthUseCase({ ...dependencies, tokenGenerator: invalid }),
+      new AuthUseCase({ ...dependencies, updateAccessTokenRepository: null }),
+      new AuthUseCase({ ...dependencies, updateAccessTokenRepository: invalid })
     ]
 
     for (const sut of suts) {
@@ -206,7 +219,8 @@ describe('Auth UseCase', () => {
     const loadUserByEmailRepository = makeLoadUserByEmailRepository()
     const encrypter = makeEncrypter()
     const tokenGenerator = makeTokenGenerator()
-    const dependencies = { loadUserByEmailRepository, encrypter, tokenGenerator }
+    const updateAccessTokenRepository = makeUpdateAccessTokenRepository()
+    const dependencies = { loadUserByEmailRepository, encrypter, tokenGenerator, updateAccessTokenRepository }
     const suts = [
       new AuthUseCase({
         ...dependencies,
@@ -219,6 +233,10 @@ describe('Auth UseCase', () => {
       new AuthUseCase({
         ...dependencies,
         tokenGenerator: makeTokenGeneratorWithError()
+      }),
+      new AuthUseCase({
+        ...dependencies,
+        updateAccessTokenRepository: makeUpdateAccessTokenRepositoryWithError()
       })
     ]
 
