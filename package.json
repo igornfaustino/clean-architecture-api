@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.16.5",
+    "@shelf/jest-mongodb": "^2.2.0",
     "@types/jest": "^27.0.3",
     "eslint": "^8.6.0",
     "eslint-config-standard": "^16.0.3",
@@ -28,6 +29,7 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.2.2",
     "validator": "^13.7.0"
   }
 }
