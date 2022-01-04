@@ -22,4 +22,13 @@ describe('Encrypter', () => {
 
     expect(isSame).toBe(false)
   })
+
+  it('should return calls bcrypt with right params', async () => {
+    const sut = new Encrypter()
+
+    await sut.compare('any_password', 'hashed_password')
+
+    expect(bcrypt.value).toBe('any_password')
+    expect(bcrypt.hashedValue).toBe('hashed_password')
+  })
 })
