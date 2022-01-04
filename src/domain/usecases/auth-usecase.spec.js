@@ -181,15 +181,18 @@ describe('Auth UseCase', () => {
     const loadUserByEmailRepository = makeLoadUserByEmailRepository()
     const encrypter = makeEncrypter()
     const tokenGenerator = makeTokenGenerator()
+    const dependencies = { loadUserByEmailRepository, encrypter, tokenGenerator }
     const suts = [
       new AuthUseCase(),
       new AuthUseCase({}),
-      new AuthUseCase({ loadUserByEmailRepository: null, encrypter, tokenGenerator }),
-      new AuthUseCase({ loadUserByEmailRepository: invalid, encrypter, tokenGenerator }),
-      new AuthUseCase({ loadUserByEmailRepository, encrypter: null, tokenGenerator }),
-      new AuthUseCase({ loadUserByEmailRepository, encrypter: invalid, tokenGenerator }),
-      new AuthUseCase({ loadUserByEmailRepository, encrypter, tokenGenerator: null }),
-      new AuthUseCase({ loadUserByEmailRepository, encrypter, tokenGenerator: invalid })
+      new AuthUseCase({ ...dependencies, loadUserByEmailRepository: null }),
+      new AuthUseCase({ ...dependencies, loadUserByEmailRepository: invalid }),
+      new AuthUseCase({ ...dependencies, encrypter: null }),
+      new AuthUseCase({ ...dependencies, encrypter: invalid }),
+      new AuthUseCase({ ...dependencies, tokenGenerator: null }),
+      new AuthUseCase({ ...dependencies, tokenGenerator: invalid }),
+      new AuthUseCase({ ...dependencies, tokenGenerator: null }),
+      new AuthUseCase({ ...dependencies, tokenGenerator: invalid })
     ]
 
     for (const sut of suts) {
@@ -203,20 +206,18 @@ describe('Auth UseCase', () => {
     const loadUserByEmailRepository = makeLoadUserByEmailRepository()
     const encrypter = makeEncrypter()
     const tokenGenerator = makeTokenGenerator()
+    const dependencies = { loadUserByEmailRepository, encrypter, tokenGenerator }
     const suts = [
       new AuthUseCase({
-        loadUserByEmailRepository: makeLoadUserByEmailRepositoryWithError(),
-        encrypter,
-        tokenGenerator
+        ...dependencies,
+        loadUserByEmailRepository: makeLoadUserByEmailRepositoryWithError()
       }),
       new AuthUseCase({
-        loadUserByEmailRepository,
-        encrypter: makeEncrypterWithError(),
-        tokenGenerator
+        ...dependencies,
+        encrypter: makeEncrypterWithError()
       }),
       new AuthUseCase({
-        loadUserByEmailRepository,
-        encrypter,
+        ...dependencies,
         tokenGenerator: makeTokenGeneratorWithError()
       })
     ]
