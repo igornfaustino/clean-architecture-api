@@ -1,10 +1,11 @@
 {
   "name": "clean-architecture-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/main/index.js",
   "author": "igornfaustino <igor@nfaustino.com>",
   "license": "MIT",
   "scripts": {
+    "start": "node src/main/index.js",
     "dev": "tsnd src/index.ts",
     "prepare": "husky install",
     "test": "jest --silent --noStackTrace --passWithNoTests",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "express": "^4.17.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.2.2",
     "validator": "^13.7.0"
