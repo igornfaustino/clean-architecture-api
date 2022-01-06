@@ -13,7 +13,7 @@ module.exports = {
     await this.client.close()
   },
 
-  async getDb () {
-    return this.db
+  async getCollection (name) {
+    return this.db.collection(name)
   }
 }

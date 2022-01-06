@@ -2,7 +2,7 @@ const { MissingParamError } = require('../../utils/errors')
 const mongoHelper = require('../helpers/mongo-helper')
 const UpdateAccessTokenRepository = require('./update-access-token-repository')
 
-let db
+let userModel
 
 const makeSut = () => {
   const sut = new UpdateAccessTokenRepository()
@@ -15,11 +15,10 @@ describe('Update AccessToken Repository', () => {
 
   beforeAll(async () => {
     await mongoHelper.connect(global.__MONGO_URI__)
-    db = await mongoHelper.getDb()
+    userModel = await mongoHelper.getCollection('users')
   })
 
   beforeEach(async () => {
-    const userModel = db.collection('users')
     await userModel.deleteMany()
     const fakeUser = { email: 'valid_email@mail.com', password: 'any_password' }
     const { insertedId } = await userModel.insertOne(fakeUser)
@@ -35,7 +34,7 @@ describe('Update AccessToken Repository', () => {
 
     await sut.update(fakeUserId, 'new_token')
 
-    const updatedFakeUser = await db.collection('users').findOne({ _id: fakeUserId })
+    const updatedFakeUser = await userModel.findOne({ _id: fakeUserId })
     expect(updatedFakeUser.accessToken).toBe('new_token')
   })
 
