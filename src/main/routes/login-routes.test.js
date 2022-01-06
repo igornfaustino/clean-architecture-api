@@ -33,4 +33,16 @@ describe('Login Routes', () => {
       })
       .expect(200)
   })
+
+  it('should return 200 when valid credentials are provided', async () => {
+    const password = 'any_password'
+
+    await request(app)
+      .post('/api/login')
+      .send({
+        email: 'valid_email@mail.com',
+        password: password
+      })
+      .expect(401)
+  })
 })
