@@ -67,7 +67,7 @@ const makeEncrypterWithError = () => {
 const makeLoadUserByEmailRepository = () => {
   class LoadUserByEmailRepositorySpy {
     output = {
-      id: 'any_id',
+      _id: 'any_id',
       password: 'hashed_password'
     }
 
@@ -165,7 +165,7 @@ describe('Auth UseCase', () => {
 
     await sut.auth('valid@mail.com', 'valid_password')
 
-    expect(tokenGeneratorSpy.userId).toBe(loadUserByEmailRepositorySpy.output.id)
+    expect(tokenGeneratorSpy.userId).toBe(loadUserByEmailRepositorySpy.output._id)
   })
 
   test('Should return an accessToken if correct credentials are provided', async () => {
@@ -182,7 +182,7 @@ describe('Auth UseCase', () => {
 
     await sut.auth('valid@mail.com', 'valid_password')
 
-    expect(updateAccessTokenRepositorySpy.userId).toBe(loadUserByEmailRepositorySpy.output.id)
+    expect(updateAccessTokenRepositorySpy.userId).toBe(loadUserByEmailRepositorySpy.output._id)
     expect(updateAccessTokenRepositorySpy.accessToken).toBe(tokenGeneratorSpy.output)
   })
 

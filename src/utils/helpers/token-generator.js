@@ -9,6 +9,6 @@ module.exports = class TokenGenerator {
   async generate (value) {
     if (!this.secret) throw new MissingParamError('secret')
     if (!value) throw new MissingParamError('value')
-    return jwt.sign(value, this.secret)
+    return jwt.sign({ value }, this.secret)
   }
 }

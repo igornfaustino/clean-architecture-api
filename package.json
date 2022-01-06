@@ -8,7 +8,7 @@
     "start": "node src/main/index.js",
     "dev": "tsnd src/index.ts",
     "prepare": "husky install",
-    "test": "jest --silent --noStackTrace --passWithNoTests --runInBand",
+    "test": "jest  --noStackTrace --passWithNoTests --runInBand",
     "test:unit": "yarn test --watch -c jest-unit-config.js",
     "test:integration": "yarn test --watch -c jest-integration-config.js",
     "test:staged": "yarn test  --findRelatedTests",
